@@ -7,7 +7,33 @@ on:
   pull_request:
 
 jobs:
+  # В самом репозитории топика лежит только скелет, который намеренно не
+  # проходит кейсы с ошибками, поэтому здесь проверяется лишь целостность
+  # топика. Приёмочные тесты запускаются в форках и копиях из шаблона.
+  topic-selfcheck:
+    if: ${{ github.repository == 'dgornin/bpm-core-topic' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: lint
+        run: make lint PYTHON=python
+
+      - name: skeleton runs
+        run: python -m bpmcore validate examples/demo_topic.json
+
+      - name: runner lists all cases
+        run: python tests/run_acceptance.py --list > /dev/null
+
   acceptance:
+    if: ${{ github.repository != 'dgornin/bpm-core-topic' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
