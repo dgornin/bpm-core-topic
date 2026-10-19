@@ -1,0 +1,5 @@
+{
+  "title": "Демо-конфигурация с политикой вуза",
+  "description": "Пример examples/demo_topic.json вместе с политикой examples/policies/demo_topic.json. Конфигурация укладывается в политику: вердикт accept.",
+  "command": "validate"
+}

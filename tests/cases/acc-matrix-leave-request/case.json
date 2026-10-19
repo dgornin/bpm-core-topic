@@ -1,0 +1,5 @@
+{
+  "title": "Матрица прав заявки на отпуск",
+  "description": "matrix для examples/leave_request.json: узел-развилка тоже является узлом прав, строки без nodes раскрываются во все узлы процесса.",
+  "command": "matrix"
+}

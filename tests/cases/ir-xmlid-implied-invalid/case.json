@@ -1,0 +1,5 @@
+{
+  "title": "Неверная подразумеваемая группа",
+  "description": "У группы teacher в implied указано \"base_group_user\" (подчёркивание вместо точки). Каждый элемент implied — xmlid вида модуль.имя.",
+  "command": "validate"
+}

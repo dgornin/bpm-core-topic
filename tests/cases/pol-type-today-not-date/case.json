@@ -1,0 +1,5 @@
+{
+  "title": "Дата записывается в текстовое поле",
+  "description": "{\"today\": true} записывается только в поле date или datetime.",
+  "command": "validate"
+}

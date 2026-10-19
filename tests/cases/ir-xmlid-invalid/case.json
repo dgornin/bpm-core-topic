@@ -1,0 +1,5 @@
+{
+  "title": "Неверный xmlid группы",
+  "description": "У группы head указан xmlid \"group_department_head\" без имени модуля. xmlid существующей группы Odoo имеет вид модуль.имя.",
+  "command": "validate"
+}

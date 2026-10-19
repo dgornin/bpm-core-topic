@@ -1,0 +1,89 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "trip", "name": "Командировки"},
+  "groups": [
+    {"key": "employee", "name": "Командировки: сотрудник"},
+    {"key": "manager", "name": "Командировки: руководитель"},
+    {"key": "accounting", "name": "Командировки: бухгалтерия"}
+  ],
+  "models": [
+    {"key": "purpose", "name": "Цель командировки", "kind": "reference", "fields": [{"name": "x_budget_code", "type": "char", "label": "Статья бюджета"}]},
+    {
+      "key": "trip",
+      "name": "Заявка на командировку",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Тема", "required": true},
+        {"name": "x_purpose_id", "type": "many2one", "label": "Цель", "relation": "purpose", "required": true},
+        {"name": "x_date_from", "type": "date", "label": "Начало", "required": true},
+        {"name": "x_date_to", "type": "date", "label": "Окончание", "required": true},
+        {"name": "x_manager_id", "type": "many2one", "label": "Руководитель", "relation": "res.users"},
+        {"name": "x_reason", "type": "text", "label": "Причина отказа"},
+        {"name": "x_order_no", "type": "char", "label": "Номер приказа"}
+      ]
+    }
+  ],
+  "roles": [
+    {"key": "employee", "name": "Сотрудник", "groups": ["employee"], "bindings": {"trip": "create_uid"}},
+    {"key": "manager", "name": "Руководитель", "groups": ["manager"], "bindings": {"trip": "x_manager_id"}},
+    {"key": "accountant", "name": "Бухгалтер", "groups": ["accounting"], "see_all": true},
+    {"key": "staff", "name": "Все сотрудники", "groups": ["employee", "manager"]}
+  ],
+  "processes": [
+    {
+      "key": "trip",
+      "name": "Согласование командировки",
+      "model": "trip",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "employee"},
+        {"key": "approval", "name": "У руководителя", "assignee": "manager"},
+        {"key": "registration", "name": "Оформление приказа", "assignee": "accountant", "release": ["manager"]},
+        {"key": "done", "name": "Оформлена", "type": "end"},
+        {"key": "refused", "name": "Отказано", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {
+          "key": "submit",
+          "label": "Отправить руководителю",
+          "from": "draft",
+          "to": "approval",
+          "by": ["employee"],
+          "requires": ["x_date_from", "x_date_to", "x_manager_id", "x_purpose_id"]
+        },
+        {"key": "approve", "label": "Согласовать", "from": "approval", "to": "registration", "by": ["manager"], "notify": ["employee"]},
+        {
+          "key": "refuse",
+          "label": "Отказать",
+          "from": "approval",
+          "to": "refused",
+          "by": ["manager"],
+          "inputs": ["x_reason"],
+          "requires": ["x_reason"],
+          "notify": ["employee"]
+        },
+        {
+          "key": "register",
+          "label": "Оформить приказ",
+          "from": "registration",
+          "to": "done",
+          "by": ["accountant"],
+          "inputs": ["x_order_no"],
+          "requires": ["x_order_no"],
+          "notify": ["employee"]
+        }
+      ],
+      "sod": [["submit", "approve"]]
+    }
+  ],
+  "access": [
+    {"role": "employee", "model": "trip", "op": "create"},
+    {"role": "employee", "model": "trip", "op": "read"},
+    {"role": "employee", "model": "trip", "op": "write", "nodes": ["draft"], "fields": ["x_name", "x_purpose_id", "x_date_from", "x_date_to", "x_manager_id"]},
+    {"role": "employee", "model": "trip", "op": "unlink", "nodes": ["draft"]},
+    {"role": "manager", "model": "trip", "op": "read", "nodes": ["approval", "refused"]},
+    {"role": "accountant", "model": "trip", "op": "read", "nodes": ["registration"]},
+    {"role": "staff", "model": "purpose", "op": "read"},
+    {"role": "accountant", "model": "purpose", "op": "read"},
+    {"role": "accountant", "model": "purpose", "op": "create"},
+    {"role": "accountant", "model": "purpose", "op": "write", "fields": ["x_name"]}
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестный вид модели",
+  "description": "Модель topic имеет kind \"catalog\". Допустимы только document и reference.",
+  "command": "validate"
+}

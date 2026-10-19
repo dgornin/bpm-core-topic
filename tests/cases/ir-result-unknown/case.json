@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестный итог завершения",
+  "description": "У конечного узла rejected итог \"declined\". Допустимы только done, rejected, cancelled.",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Обратное поле one2many — не many2one",
+  "description": "Обратное поле x_topic_id в модели note — строка (char), а должно быть many2one.",
+  "command": "validate"
+}

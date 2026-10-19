@@ -1,0 +1,14 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json",
+  "--policy",
+  "policy.json"
+ ],
+ "exit_code": 1,
+ "verdict": "reject",
+ "codes": [
+  "I.unbound"
+ ],
+ "level": "A"
+}

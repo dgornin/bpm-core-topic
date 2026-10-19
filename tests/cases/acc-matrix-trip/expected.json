@@ -1,0 +1,141 @@
+{
+ "command": "matrix",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "cells": [
+  {
+   "role": "accountant",
+   "model": "purpose",
+   "op": "create",
+   "node": "*",
+   "fields": [
+    "x_budget_code",
+    "x_name"
+   ]
+  },
+  {
+   "role": "accountant",
+   "model": "purpose",
+   "op": "read",
+   "node": "*"
+  },
+  {
+   "role": "accountant",
+   "model": "purpose",
+   "op": "write",
+   "node": "*",
+   "fields": [
+    "x_name"
+   ]
+  },
+  {
+   "role": "accountant",
+   "model": "trip",
+   "op": "read",
+   "node": "registration"
+  },
+  {
+   "role": "accountant",
+   "model": "trip",
+   "op": "write",
+   "node": "registration",
+   "fields": [
+    "x_order_no"
+   ]
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "create",
+   "node": "*",
+   "fields": [
+    "x_date_from",
+    "x_date_to",
+    "x_manager_id",
+    "x_name",
+    "x_order_no",
+    "x_purpose_id",
+    "x_reason"
+   ]
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "read",
+   "node": "approval"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "read",
+   "node": "done"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "read",
+   "node": "draft"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "read",
+   "node": "refused"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "read",
+   "node": "registration"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "unlink",
+   "node": "draft"
+  },
+  {
+   "role": "employee",
+   "model": "trip",
+   "op": "write",
+   "node": "draft",
+   "fields": [
+    "x_date_from",
+    "x_date_to",
+    "x_manager_id",
+    "x_name",
+    "x_purpose_id"
+   ]
+  },
+  {
+   "role": "manager",
+   "model": "trip",
+   "op": "read",
+   "node": "approval"
+  },
+  {
+   "role": "manager",
+   "model": "trip",
+   "op": "read",
+   "node": "refused"
+  },
+  {
+   "role": "manager",
+   "model": "trip",
+   "op": "write",
+   "node": "approval",
+   "fields": [
+    "x_reason"
+   ]
+  },
+  {
+   "role": "staff",
+   "model": "purpose",
+   "op": "read",
+   "node": "*"
+  }
+ ],
+ "level": "B"
+}

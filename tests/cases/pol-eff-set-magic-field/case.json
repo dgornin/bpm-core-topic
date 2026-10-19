@@ -1,0 +1,5 @@
+{
+  "title": "set в служебное поле",
+  "description": "Действие пытается переписать write_uid. Служебные поля (id, create_uid, write_uid, create_date, write_date) действиями не записываются.",
+  "command": "validate"
+}

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bpmcore"
+version = "1.0.0"
+description = "Ядро low-code BPM-движка: валидатор конфигураций процессов согласования с выводом матрицы прав (заготовка решения топика)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Даниил Горнин" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+bpmcore = "bpmcore.cli:main"
+
+[tool.setuptools]
+packages = ["bpmcore"]

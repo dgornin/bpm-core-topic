@@ -1,0 +1,45 @@
+{
+  "external_models": {
+    "res.users": {
+      "name": "Пользователь",
+      "fields": {
+        "name": {
+          "type": "char"
+        },
+        "login": {
+          "type": "char"
+        },
+        "partner_id": {
+          "type": "many2one",
+          "relation": "res.partner"
+        }
+      }
+    },
+    "res.partner": {
+      "name": "Контакт",
+      "fields": {
+        "name": {
+          "type": "char"
+        },
+        "email": {
+          "type": "char"
+        }
+      }
+    },
+    "project.project": {
+      "name": "Проект",
+      "fields": {
+        "name": {
+          "type": "char"
+        },
+        "user_id": {
+          "type": "many2one",
+          "relation": "res.users"
+        },
+        "privacy_visibility": {
+          "type": "selection"
+        }
+      }
+    }
+  }
+}

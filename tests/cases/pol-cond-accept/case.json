@@ -1,0 +1,5 @@
+{
+  "title": "Корректные условия переходов",
+  "description": "У submit, approve и reject условия всех простых видов: all/any/not, actor, сравнение поля, set, in со списком, {\"today\": true} для даты, null как значение. Все условия синтаксически верны, находок нет.",
+  "command": "validate"
+}

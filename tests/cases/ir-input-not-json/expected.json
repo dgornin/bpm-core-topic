@@ -1,0 +1,8 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 4,
+ "level": "C"
+}

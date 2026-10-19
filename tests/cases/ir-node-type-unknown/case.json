@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестный тип узла",
+  "description": "Узел published имеет тип \"finish\". Поддерживаются только step, xor и end.",
+  "command": "validate"
+}

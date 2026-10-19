@@ -1,0 +1,5 @@
+{
+  "title": "set в несуществующее поле",
+  "description": "Действие set записывает поле x_status, которого у темы нет.",
+  "command": "validate"
+}

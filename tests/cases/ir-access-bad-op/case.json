@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестная операция в правах",
+  "description": "Операция \"delete\" вместо unlink. Допустимы read, write, create, unlink.",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Выход развилки без условия",
+  "description": "Выход publish развилки route не помечен default и не имеет condition. Движку не по чему решить, когда выбирать этот выход.",
+  "command": "validate"
+}

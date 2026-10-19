@@ -1,0 +1,5 @@
+{
+  "title": "У поля выбора нет вариантов",
+  "description": "Поле x_level типа selection описано без selection. Поле выбора без вариантов бессмысленно.",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Поле описано строкой",
+  "description": "В списке полей модели topic вместо объекта стоит строка \"x_deadline\". Каждое поле — объект с name, type, label.",
+  "command": "validate"
+}

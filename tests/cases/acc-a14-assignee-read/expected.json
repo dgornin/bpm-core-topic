@@ -1,0 +1,13 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 1,
+ "verdict": "reject",
+ "codes": [
+  "A14.assignee_read",
+  "A6.by_read"
+ ],
+ "level": "B"
+}

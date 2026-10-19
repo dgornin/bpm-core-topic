@@ -1,0 +1,5 @@
+{
+  "title": "Роль ссылается на неизвестную группу",
+  "description": "Роль student ссылается на группу \"students\", а группа называется student.",
+  "command": "validate"
+}

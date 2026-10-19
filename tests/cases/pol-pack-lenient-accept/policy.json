@@ -1,0 +1,78 @@
+{
+  "must_pass": [
+    {
+      "process": "topic",
+      "before": "published",
+      "through": "review"
+    },
+    {
+      "process": "topic",
+      "before": "published",
+      "through": "draft"
+    }
+  ],
+  "ceilings": [
+    {
+      "role": "student",
+      "model": "topic",
+      "ops": [
+        "read"
+      ],
+      "nodes": [
+        "published"
+      ]
+    },
+    {
+      "role": "head",
+      "model": "topic",
+      "ops": [
+        "read"
+      ],
+      "nodes": [
+        "review",
+        "published",
+        "rejected"
+      ]
+    },
+    {
+      "role": "author",
+      "model": "topic",
+      "ops": [
+        "write",
+        "unlink"
+      ],
+      "nodes": [
+        "draft"
+      ]
+    },
+    {
+      "role": "dean",
+      "model": "topic",
+      "ops": [
+        "read"
+      ]
+    }
+  ],
+  "floors": [
+    {
+      "role": "author",
+      "model": "topic",
+      "op": "read",
+      "nodes": [
+        "draft",
+        "review",
+        "published",
+        "rejected"
+      ]
+    }
+  ],
+  "separate": [
+    [
+      "submit",
+      "approve"
+    ]
+  ],
+  "bound_roles": [
+    "author"
+  ]
+}

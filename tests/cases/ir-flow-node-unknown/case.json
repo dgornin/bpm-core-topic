@@ -1,0 +1,5 @@
+{
+  "title": "Переход в несуществующий узел",
+  "description": "Переход approve ведёт в узел \"publish\", а узел называется published.",
+  "command": "validate"
+}

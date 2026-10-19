@@ -1,0 +1,6 @@
+{
+  "title": "matrix: вход не JSON",
+  "description": "Файл конфигурации обрывается посередине. Команда matrix, как и validate, отвечает {\"error\": ...} с кодом выхода 4.",
+  "command": "matrix",
+  "level": "B"
+}

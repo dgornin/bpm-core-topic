@@ -1,0 +1,5 @@
+{
+  "title": "node_of с неизвестным узлом",
+  "description": "Заявку можно отправить, если тема в узле approved, но в процессе темы такого узла нет (есть published).",
+  "command": "validate"
+}

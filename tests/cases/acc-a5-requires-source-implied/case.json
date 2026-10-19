@@ -1,0 +1,5 @@
+{
+  "title": "Поле пишут только через inputs другого перехода",
+  "description": "Переход submit требует x_resolution. Это поле вводит заведующий при переходе approve (inputs) — то есть кто-то его пишет, — но автор в draft его писать не может. Предупреждение A5.requires_source.",
+  "command": "validate"
+}

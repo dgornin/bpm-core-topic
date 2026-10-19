@@ -1,0 +1,5 @@
+{
+  "title": "Политика называет неизвестную роль",
+  "description": "bound_roles содержит supervisor, а в демо-конфигурации такой роли нет.",
+  "command": "validate"
+}

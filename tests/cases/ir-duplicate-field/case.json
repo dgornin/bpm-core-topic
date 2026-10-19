@@ -1,0 +1,5 @@
+{
+  "title": "Поле модели описано дважды",
+  "description": "В модели topic два поля x_description. Имена полей внутри модели уникальны.",
+  "command": "validate"
+}

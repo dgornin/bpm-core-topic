@@ -1,0 +1,5 @@
+{
+  "title": "Путь привязки через несуществующее поле",
+  "description": "Роль author привязана путём create_uid.manager_id, но у res.users в снимке платформы нет поля manager_id.",
+  "command": "validate"
+}

@@ -1,0 +1,52 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "demo", "name": "Демо: согласование тем"},
+  "groups": [
+    {"key": "teacher", "name": "Демо: преподаватель"},
+    {"key": "head", "name": "Демо: заведующий"},
+    {"key": "student", "name": "Демо: студент"}
+  ],
+  "models": [
+    {
+      "key": "topic",
+      "name": "Тема",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Название", "required": true},
+        {"name": "x_description", "type": "text", "label": "Описание"}
+      ]
+    }
+  ],
+  "roles": [
+    {"key": "author", "name": "Автор", "groups": ["teacher"], "bindings": {"topic": "create_uid"}},
+    {"key": "head", "name": "Заведующий", "groups": ["head"]},
+    {"key": "student", "name": "Студент", "groups": ["student"]}
+  ],
+  "processes": [
+    {
+      "key": "topic",
+      "name": "Согласование темы",
+      "model": "topic",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "author"},
+        {"key": "review", "name": "На утверждении", "assignee": "head"},
+        {"key": "published", "name": "Опубликована", "type": "end"},
+        {"key": "rejected", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "submit", "label": "Отправить на утверждение", "from": "draft", "to": "review", "by": ["author"], "requires": ["x_description"]},
+        {"key": "approve", "label": "Утвердить", "from": "review", "to": "published", "by": ["head"], "notify": ["author"], "condition": {"field": "x_description", "op": "contains", "value": "ВКР"}},
+        {"key": "rework", "label": "На доработку", "from": "review", "to": "draft", "by": ["head"], "kind": "return", "comment": "required", "notify": ["author"]},
+        {"key": "reject", "label": "Отклонить", "from": "review", "to": "rejected", "by": ["head"], "comment": "required", "notify": ["author"]}
+      ],
+      "sod": [["submit", "approve"]]
+    }
+  ],
+  "access": [
+    {"role": "author", "model": "topic", "op": "create"},
+    {"role": "author", "model": "topic", "op": "read"},
+    {"role": "author", "model": "topic", "op": "write", "nodes": ["draft"], "fields": ["x_name", "x_description"]},
+    {"role": "author", "model": "topic", "op": "unlink", "nodes": ["draft"]},
+    {"role": "head", "model": "topic", "op": "read", "nodes": ["review", "published", "rejected"]},
+    {"role": "student", "model": "topic", "op": "read", "nodes": ["review", "published"]}
+  ]
+}

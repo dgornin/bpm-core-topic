@@ -1,0 +1,5 @@
+{
+  "title": "Источник другого вида",
+  "description": "В текст x_description копируется дата create_date: источник и поле разного вида (дата и текст).",
+  "command": "validate"
+}

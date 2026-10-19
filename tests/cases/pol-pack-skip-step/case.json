@@ -1,0 +1,5 @@
+{
+  "title": "Публикация в обход утверждения",
+  "description": "Добавлен переход fast из draft сразу в published. Политика требует проходить review до published, а теперь до published можно дойти, минуя review.",
+  "command": "validate"
+}

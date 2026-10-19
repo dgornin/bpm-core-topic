@@ -1,0 +1,5 @@
+{
+  "title": "fire по полю, которое не связь",
+  "description": "Путь fire должен вести к связанным записям (many2one, one2many, many2many), а x_name — строка.",
+  "command": "validate"
+}

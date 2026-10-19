@@ -1,0 +1,5 @@
+{
+  "title": "release ссылается на неизвестную роль",
+  "description": "У узла published в release указана роль \"authors\" (опечатка, роль называется author).",
+  "command": "validate"
+}

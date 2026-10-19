@@ -1,0 +1,5 @@
+{
+  "title": "Значение не из вариантов выбора",
+  "description": "У поля x_kind варианты course и thesis, а действие записывает diploma.",
+  "command": "validate"
+}

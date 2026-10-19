@@ -1,0 +1,84 @@
+{
+ "command": "matrix",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "cells": [
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "create",
+   "node": "*",
+   "fields": [
+    "x_description",
+    "x_name"
+   ]
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "read",
+   "node": "draft"
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "read",
+   "node": "published"
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "read",
+   "node": "rejected"
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "read",
+   "node": "review"
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "unlink",
+   "node": "draft"
+  },
+  {
+   "role": "author",
+   "model": "topic",
+   "op": "write",
+   "node": "draft",
+   "fields": [
+    "x_description",
+    "x_name"
+   ]
+  },
+  {
+   "role": "head",
+   "model": "topic",
+   "op": "read",
+   "node": "published"
+  },
+  {
+   "role": "head",
+   "model": "topic",
+   "op": "read",
+   "node": "rejected"
+  },
+  {
+   "role": "head",
+   "model": "topic",
+   "op": "read",
+   "node": "review"
+  },
+  {
+   "role": "student",
+   "model": "topic",
+   "op": "read",
+   "node": "published"
+  }
+ ],
+ "level": "B"
+}

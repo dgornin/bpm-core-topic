@@ -1,0 +1,5 @@
+{
+  "title": "Поле ввода перехода — список",
+  "description": "Переход approve просит заполнить x_reviewer_ids (many2many). Поле ввода перехода не может быть списком (one2many, many2many).",
+  "command": "validate"
+}

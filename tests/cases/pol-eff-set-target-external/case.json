@@ -1,0 +1,5 @@
+{
+  "title": "set в запись модели Odoo",
+  "description": "Цель set — create_uid, то есть пользователь Odoo. Действие set может писать только в саму запись или в запись модели приложения по ссылке many2one.",
+  "command": "validate"
+}

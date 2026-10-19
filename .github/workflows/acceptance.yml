@@ -1,0 +1,36 @@
+# Приёмочные тесты по уровням. Шаги B и A не роняют сборку, чтобы на странице
+# прогона было видно, какой уровень пройден: зелёный шаг — уровень сдан.
+name: acceptance
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: lint
+        run: make lint PYTHON=python
+
+      - name: level C
+        run: make test-c PYTHON=python
+
+      - name: level B (C + B)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: make test-b PYTHON=python
+
+      - name: level A (C + B + A)
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: make test-a PYTHON=python

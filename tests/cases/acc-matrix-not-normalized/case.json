@@ -1,0 +1,5 @@
+{
+  "title": "matrix на ненормализуемом IR",
+  "description": "В строке create указаны nodes — ошибка нормализации S1.access. Команда matrix выводит то же, что validate: вердикт reject и находки, код выхода 1.",
+  "command": "matrix"
+}

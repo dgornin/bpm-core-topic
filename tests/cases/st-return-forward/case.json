@@ -1,0 +1,5 @@
+{
+  "title": "Возврат, который ведёт вперёд",
+  "description": "Переход reject (review -> rejected) ошибочно помечен kind: return. Возврат должен вести к узлу, из которого можно снова прийти в исходный, а из rejected в review не попасть. Это предупреждение: verdict остаётся accept.",
+  "command": "validate"
+}

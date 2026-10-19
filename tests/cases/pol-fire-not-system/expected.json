@@ -1,0 +1,12 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "verdict": "accept",
+ "codes": [
+  "S2.fire_not_system"
+ ],
+ "level": "A"
+}

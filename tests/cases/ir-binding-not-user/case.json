@@ -1,0 +1,5 @@
+{
+  "title": "Привязка роли к контакту, а не к пользователю",
+  "description": "Роль author привязана к полю x_contact_id — ссылке на res.partner. Путь привязки должен заканчиваться ссылкой на res.users.",
+  "command": "validate"
+}

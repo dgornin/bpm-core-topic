@@ -1,0 +1,70 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "demo", "name": "Демо: темы с проектами"},
+  "groups": [
+    {"key": "teacher", "name": "Демо: преподаватель"},
+    {"key": "head", "name": "Демо: заведующий", "implied": ["base.group_user"]},
+    {"key": "student", "name": "Демо: студент"},
+    {"key": "employee", "name": "Внутренний пользователь", "xmlid": "base.group_user"}
+  ],
+  "models": [
+    {
+      "key": "topic",
+      "name": "Тема",
+      "fields": [
+        {"name": "x_description", "type": "text", "label": "Описание"},
+        {"name": "x_level", "type": "selection", "label": "Уровень", "selection": [["bachelor", "Бакалавриат"], ["master", "Магистратура"]], "default": "master"},
+        {"name": "x_seats", "type": "integer", "label": "Мест", "default": 1},
+        {"name": "x_is_open", "type": "boolean", "label": "Открыта", "default": true},
+        {"name": "x_supervisor_id", "type": "many2one", "label": "Руководитель", "relation": "res.users"},
+        {"name": "x_project_id", "type": "many2one", "label": "Проект", "relation": "project.project"},
+        {"name": "x_note_ids", "type": "one2many", "label": "Замечания", "relation": "x_demo_note", "inverse": "x_topic_id"}
+      ],
+      "unique": [{"fields": ["x_name", "create_uid"], "live_nodes": ["review", "published"]}]
+    },
+    {
+      "key": "note",
+      "name": "Замечание",
+      "kind": "reference",
+      "model": "x_demo_note",
+      "fields": [{"name": "x_topic_id", "type": "many2one", "label": "Тема", "relation": "topic", "required": true}]
+    }
+  ],
+  "roles": [
+    {"key": "author", "name": "Автор", "groups": ["teacher"], "bindings": {"topic": "create_uid"}},
+    {"key": "supervisor", "name": "Руководитель темы", "groups": ["teacher"], "bindings": {"topic": "x_supervisor_id"}},
+    {"key": "manager", "name": "Руководитель проекта", "groups": ["employee"], "bindings": {"topic": "x_project_id.user_id"}},
+    {"key": "head", "name": "Заведующий", "groups": ["head", "head"]},
+    {"key": "student", "name": "Студент", "groups": ["student"]}
+  ],
+  "processes": [
+    {
+      "key": "topic",
+      "name": "Согласование темы",
+      "model": "topic",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "author"},
+        {"key": "review", "name": "На утверждении", "assignee": "head"},
+        {"key": "published", "name": "Опубликована", "type": "end"},
+        {"key": "rejected", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "approve", "label": "Утвердить", "from": "review", "to": "published", "by": ["head"], "notify": ["author", "author"], "sequence": 20},
+        {"key": "submit", "from": "draft", "to": "review", "by": ["author"], "requires": ["x_name", "x_description"], "sequence": 10},
+        {"key": "rework", "label": "На доработку", "from": "review", "to": "draft", "by": ["head"], "kind": "return", "comment": "required", "sequence": 30},
+        {"key": "reject", "label": "Отклонить", "from": "review", "to": "rejected", "by": ["head"], "comment": "optional", "sequence": 40}
+      ],
+      "sod": [["submit", "approve"]]
+    }
+  ],
+  "access": [
+    {"role": "author", "model": "topic", "op": "create"},
+    {"role": "author", "model": "topic", "op": "read"},
+    {"role": "author", "model": "topic", "op": "write", "nodes": ["draft"]},
+    {"role": "head", "model": "topic", "op": "read", "nodes": ["rejected", "review", "published", "review"]},
+    {"role": "student", "model": "topic", "op": "read", "nodes": ["published"]},
+    {"role": "supervisor", "model": "topic", "op": "read"},
+    {"role": "manager", "model": "topic", "op": "read", "nodes": ["published"]},
+    {"role": "head", "model": "note", "op": "read"}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+ "command": "matrix",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 4,
+ "level": "B"
+}

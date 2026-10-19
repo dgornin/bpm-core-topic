@@ -1,0 +1,5 @@
+{
+  "title": "Матрица прав демо-конфигурации",
+  "description": "matrix для examples/demo_topic.json: строки без nodes раскрываются во все узлы процесса, create — узел «*», поля по умолчанию — все поля модели.",
+  "command": "matrix"
+}

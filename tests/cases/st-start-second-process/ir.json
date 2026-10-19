@@ -1,0 +1,77 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "demo", "name": "Демо: согласование тем"},
+  "groups": [
+    {"key": "teacher", "name": "Демо: преподаватель"},
+    {"key": "head", "name": "Демо: заведующий"},
+    {"key": "student", "name": "Демо: студент"},
+    {"key": "secretary", "name": "Демо: секретарь"}
+  ],
+  "models": [
+    {
+      "key": "topic",
+      "name": "Тема",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Название", "required": true},
+        {"name": "x_description", "type": "text", "label": "Описание"}
+      ]
+    },
+    {
+      "key": "meeting",
+      "name": "Заседание кафедры",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Название", "required": true},
+        {"name": "x_date", "type": "date", "label": "Дата"}
+      ]
+    }
+  ],
+  "roles": [
+    {"key": "author", "name": "Автор", "groups": ["teacher"], "bindings": {"topic": "create_uid"}},
+    {"key": "head", "name": "Заведующий", "groups": ["head"]},
+    {"key": "student", "name": "Студент", "groups": ["student"]},
+    {"key": "secretary", "name": "Секретарь", "groups": ["secretary"]}
+  ],
+  "processes": [
+    {
+      "key": "topic",
+      "name": "Согласование темы",
+      "model": "topic",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "author"},
+        {"key": "review", "name": "На утверждении", "assignee": "head"},
+        {"key": "published", "name": "Опубликована", "type": "end"},
+        {"key": "rejected", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "submit", "label": "Отправить на утверждение", "from": "draft", "to": "review", "by": ["author"], "requires": ["x_description"]},
+        {"key": "approve", "label": "Утвердить", "from": "review", "to": "published", "by": ["head"], "notify": ["author"]},
+        {"key": "rework", "label": "На доработку", "from": "review", "to": "draft", "by": ["head"], "kind": "return", "comment": "required", "notify": ["author"]},
+        {"key": "reject", "label": "Отклонить", "from": "review", "to": "rejected", "by": ["head"], "comment": "required", "notify": ["author"]}
+      ],
+      "sod": [["submit", "approve"]]
+    },
+    {
+      "key": "meeting",
+      "name": "Проведение заседания",
+      "model": "meeting",
+      "nodes": [
+        {"key": "planned", "name": "Запланировано", "assignee": "secretary"},
+        {"key": "held", "name": "Проведено", "type": "end"}
+      ],
+      "flows": [
+        {"key": "hold", "label": "Провести", "from": "planned", "to": "held", "by": ["secretary"]}
+      ]
+    }
+  ],
+  "access": [
+    {"role": "author", "model": "topic", "op": "create"},
+    {"role": "author", "model": "topic", "op": "read"},
+    {"role": "author", "model": "topic", "op": "write", "nodes": ["draft"], "fields": ["x_name", "x_description"]},
+    {"role": "author", "model": "topic", "op": "unlink", "nodes": ["draft"]},
+    {"role": "head", "model": "topic", "op": "read", "nodes": ["review", "published", "rejected"]},
+    {"role": "student", "model": "topic", "op": "read", "nodes": ["published"]},
+    {"role": "secretary", "model": "meeting", "op": "create"},
+    {"role": "secretary", "model": "meeting", "op": "read"},
+    {"role": "secretary", "model": "meeting", "op": "write", "nodes": ["planned"], "fields": ["x_name", "x_date"]}
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Значение по умолчанию не из вариантов",
+  "description": "У поля x_level default = \"phd\", а варианты — bachelor и master.",
+  "command": "validate"
+}

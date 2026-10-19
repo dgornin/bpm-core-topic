@@ -1,0 +1,5 @@
+{
+  "title": "Значение по умолчанию у текстового поля",
+  "description": "У поля x_description (text) задан default. Значение по умолчанию допускается только у полей char, integer, boolean, selection.",
+  "command": "validate"
+}

@@ -1,0 +1,12 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "verdict": "accept",
+ "codes": [
+  "S3.return"
+ ],
+ "level": "C"
+}

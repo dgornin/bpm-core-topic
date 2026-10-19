@@ -1,0 +1,60 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "leave", "name": "Заявки на отпуск"},
+  "groups": [
+    {"key": "employee", "name": "Отпуск: сотрудник"},
+    {"key": "manager", "name": "Отпуск: руководитель"},
+    {"key": "hr", "name": "Отпуск: отдел кадров"}
+  ],
+  "models": [
+    {
+      "key": "request",
+      "name": "Заявка на отпуск",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Заголовок", "required": true},
+        {"name": "x_date_from", "type": "date", "label": "Первый день отпуска", "required": true},
+        {"name": "x_days", "type": "integer", "label": "Число дней", "required": true},
+        {"name": "x_reason", "type": "text", "label": "Комментарий сотрудника"}
+      ]
+    }
+  ],
+  "roles": [
+    {"key": "employee", "name": "Сотрудник (автор заявки)", "groups": ["employee"], "bindings": {"request": "create_uid"}},
+    {"key": "manager", "name": "Руководитель", "groups": ["manager"]},
+    {"key": "hr", "name": "Кадровик", "groups": ["hr"]}
+  ],
+  "processes": [
+    {
+      "key": "leave",
+      "name": "Согласование отпуска",
+      "model": "request",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "employee"},
+        {"key": "manager_review", "name": "У руководителя", "assignee": "manager"},
+        {"key": "long_leave", "name": "Отпуск длиннее 14 дней?", "type": "xor"},
+        {"key": "hr_review", "name": "В отделе кадров", "assignee": "hr"},
+        {"key": "approved", "name": "Согласована", "type": "end", "result": "done"},
+        {"key": "rejected", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "submit", "label": "Отправить руководителю", "from": "draft", "to": "manager_review", "by": ["employee"], "requires": ["x_date_from", "x_days"]},
+        {"key": "manager_approve", "label": "Согласовать", "from": "manager_review", "to": "long_leave", "by": ["manager"], "notify": ["employee"]},
+        {"key": "manager_rework", "label": "Вернуть на доработку", "from": "manager_review", "to": "draft", "by": ["manager"], "kind": "return", "comment": "required", "notify": ["employee"]},
+        {"key": "manager_reject", "label": "Отклонить", "from": "manager_review", "to": "rejected", "by": ["manager"], "comment": "required", "notify": ["employee"]},
+        {"key": "to_hr", "label": "Нужно согласование кадров", "from": "long_leave", "to": "hr_review", "auto": true, "condition": {"field": "x_days", "op": ">", "value": 14}},
+        {"key": "short_leave", "label": "Короткий отпуск", "from": "long_leave", "to": "approved", "auto": true, "default": true},
+        {"key": "hr_approve", "label": "Согласовать", "from": "hr_review", "to": "approved", "by": ["hr"], "notify": ["employee"]},
+        {"key": "hr_rework", "label": "Вернуть на доработку", "from": "hr_review", "to": "draft", "by": ["hr"], "kind": "return", "comment": "required", "notify": ["employee"]}
+      ],
+      "sod": [["submit", "manager_approve"]]
+    }
+  ],
+  "access": [
+    {"role": "employee", "model": "request", "op": "create", "fields": ["x_name", "x_date_from", "x_days", "x_reason"]},
+    {"role": "employee", "model": "request", "op": "read"},
+    {"role": "employee", "model": "request", "op": "write", "nodes": ["draft"], "fields": ["x_name", "x_date_from", "x_days", "x_reason"]},
+    {"role": "employee", "model": "request", "op": "unlink", "nodes": ["draft"]},
+    {"role": "manager", "model": "request", "op": "read", "nodes": ["manager_review", "long_leave", "hr_review", "approved", "rejected"]},
+    {"role": "hr", "model": "request", "op": "read", "nodes": ["hr_review", "approved"]}
+  ]
+}

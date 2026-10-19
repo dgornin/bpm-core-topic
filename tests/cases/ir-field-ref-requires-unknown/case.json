@@ -1,0 +1,5 @@
+{
+  "title": "requires ссылается на неизвестное поле",
+  "description": "Переход submit требует заполненности поля x_annotation, которого в модели topic нет.",
+  "command": "validate"
+}

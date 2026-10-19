@@ -1,0 +1,5 @@
+{
+  "title": "{\"today\": true} для текстового поля",
+  "description": "Значение-объект {\"today\": true} (сегодняшняя дата) допустимо только для полей date и datetime, а x_name — строка.",
+  "command": "validate"
+}

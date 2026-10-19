@@ -1,0 +1,5 @@
+{
+  "title": "create с repeat по нечисловому полю",
+  "description": "repeat задаёт, сколько записей создать, и должен быть целым полем исходной записи; x_description — текст.",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Неподдерживаемый тип поля",
+  "description": "Поле x_budget имеет тип monetary. В Odoo такой тип есть, но IR v0.1 его не поддерживает.",
+  "command": "validate"
+}

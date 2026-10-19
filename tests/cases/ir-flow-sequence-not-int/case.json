@@ -1,0 +1,5 @@
+{
+  "title": "Порядковый номер перехода — строка",
+  "description": "У перехода reject sequence = \"40\" (строка). sequence — целое число.",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Пара SoD в другом порядке",
+  "description": "В политике пара записана как [approve, submit], в процессе — [submit, approve]. Порядок в паре не важен, находок нет.",
+  "command": "validate"
+}

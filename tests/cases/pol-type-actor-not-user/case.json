@@ -1,0 +1,5 @@
+{
+  "title": "Нажавший записывается в текстовое поле",
+  "description": "{\"user\": \"actor\"} (нажавший пользователь) можно записать только в many2one на res.users, а x_description — текст.",
+  "command": "validate"
+}

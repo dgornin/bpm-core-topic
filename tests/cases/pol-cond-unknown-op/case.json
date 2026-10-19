@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестная операция сравнения",
+  "description": "Операции contains в языке условий нет. Допустимы только =, !=, <, <=, >, >=, in, not in, set, unset.",
+  "command": "validate"
+}

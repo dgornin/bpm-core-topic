@@ -1,0 +1,5 @@
+{
+  "title": "count по полю, которое не список",
+  "description": "count считает строки one2many-поля, а x_description — текст.",
+  "command": "validate"
+}

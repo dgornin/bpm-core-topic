@@ -1,0 +1,5 @@
+{
+  "title": "one2many на внешнюю модель",
+  "description": "Поле x_partner_ids — one2many на res.partner. one2many допускается только на модели самого приложения: во внешнюю модель нельзя добавить обратное поле.",
+  "command": "validate"
+}

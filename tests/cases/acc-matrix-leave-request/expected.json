@@ -1,0 +1,118 @@
+{
+ "command": "matrix",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "cells": [
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "create",
+   "node": "*",
+   "fields": [
+    "x_date_from",
+    "x_days",
+    "x_name",
+    "x_reason"
+   ]
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "approved"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "draft"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "hr_review"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "long_leave"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "manager_review"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "read",
+   "node": "rejected"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "unlink",
+   "node": "draft"
+  },
+  {
+   "role": "employee",
+   "model": "request",
+   "op": "write",
+   "node": "draft",
+   "fields": [
+    "x_date_from",
+    "x_days",
+    "x_name",
+    "x_reason"
+   ]
+  },
+  {
+   "role": "hr",
+   "model": "request",
+   "op": "read",
+   "node": "approved"
+  },
+  {
+   "role": "hr",
+   "model": "request",
+   "op": "read",
+   "node": "hr_review"
+  },
+  {
+   "role": "manager",
+   "model": "request",
+   "op": "read",
+   "node": "approved"
+  },
+  {
+   "role": "manager",
+   "model": "request",
+   "op": "read",
+   "node": "hr_review"
+  },
+  {
+   "role": "manager",
+   "model": "request",
+   "op": "read",
+   "node": "long_leave"
+  },
+  {
+   "role": "manager",
+   "model": "request",
+   "op": "read",
+   "node": "manager_review"
+  },
+  {
+   "role": "manager",
+   "model": "request",
+   "op": "read",
+   "node": "rejected"
+  }
+ ],
+ "level": "B"
+}

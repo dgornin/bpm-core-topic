@@ -1,0 +1,5 @@
+{
+  "title": "create с неверным полем связи",
+  "description": "link должен быть полем исходной записи со ссылкой на создаваемую модель, а x_description — текст.",
+  "command": "validate"
+}

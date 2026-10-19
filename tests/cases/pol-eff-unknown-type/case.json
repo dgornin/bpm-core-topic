@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестный вид действия",
+  "description": "Действия notify нет: допустимы fire, set, create, subscribe (уведомления задаются полем notify перехода).",
+  "command": "validate"
+}

@@ -1,0 +1,5 @@
+{
+  "title": "requires ссылается на служебное поле",
+  "description": "Переход submit требует поле create_date. Служебные поля (id, create_uid, write_uid, create_date, write_date) нельзя указывать в requires и inputs.",
+  "command": "validate"
+}

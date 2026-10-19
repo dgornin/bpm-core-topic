@@ -1,0 +1,5 @@
+{
+  "title": "subscribe с целью не many2one",
+  "description": "Цель подписки должна быть ссылкой many2one на запись, а x_name — строка.",
+  "command": "validate"
+}

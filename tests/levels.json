@@ -1,0 +1,26 @@
+{
+  "_comment": "Уровень, к которому относится каждый код находки. Код вне списка (например P2.*) в топик не входит.",
+  "C": [
+    "S1.not_object", "S1.version", "S1.app", "S1.label", "S1.section", "S1.key",
+    "S1.duplicate", "S1.process_model", "S1.node", "S1.node_type", "S1.assignee",
+    "S1.result", "S1.sod", "S1.flow", "S1.flow_node", "S1.flow_kind", "S1.comment",
+    "S1.role_ref",
+    "S3.start", "S3.end", "S3.end_out", "S3.unreachable", "S3.dead_end", "S3.return",
+    "S3.auto", "S3.xor", "S3.xor_auto", "S3.xor_by", "S3.xor_condition", "S3.xor_default",
+    "S5.no_end"
+  ],
+  "B": [
+    "S1.model_kind", "S1.model_name", "S1.field", "S1.field_name", "S1.field_type",
+    "S1.relation", "S1.inverse", "S1.ondelete", "S1.selection", "S1.default", "S1.unique",
+    "S1.create_if", "S1.xmlid", "S1.binding", "S1.role_groups", "S1.field_ref", "S1.access",
+    "A4.continuity", "A5.requires", "A5.requires_source",
+    "A6.assignee_no_action", "A6.by_read", "A6.no_trigger",
+    "A7.creator_read", "A7.no_creator", "A7.required_not_creatable",
+    "A11.sod_unsatisfiable", "A14.assignee_read", "A15.related_read"
+  ],
+  "A": [
+    "S1.condition", "S2.effect", "S2.effect_type", "S2.fire_not_system", "S2.system_unused",
+    "A8.self_assign", "A8.effect_self_assign", "A8.effect_launder", "A8.effect_claim",
+    "I.must_pass", "I.skip_step", "I.excess", "I.floor", "I.sod_missing", "I.bound", "I.unbound"
+  ]
+}

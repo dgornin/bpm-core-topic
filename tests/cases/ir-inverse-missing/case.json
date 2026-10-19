@@ -1,0 +1,5 @@
+{
+  "title": "Обратное поле one2many не найдено",
+  "description": "x_note_ids — one2many на модель note с inverse x_topic, но в note такого поля нет (поле называется x_topic_id). У one2many обязательно обратное поле many2one в целевой модели.",
+  "command": "validate"
+}

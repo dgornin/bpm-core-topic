@@ -1,0 +1,5 @@
+{
+  "title": "Политика требует неизвестный узел",
+  "description": "must_pass требует пройти review до узла approved, но в процессе темы узла approved нет (есть published).",
+  "command": "validate"
+}

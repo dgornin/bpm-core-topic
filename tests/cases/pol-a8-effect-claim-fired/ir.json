@@ -1,0 +1,85 @@
+{
+  "ir_version": "0.1",
+  "app": {"key": "demo", "name": "Демо: согласование тем"},
+  "groups": [
+    {"key": "teacher", "name": "Демо: преподаватель"},
+    {"key": "head", "name": "Демо: заведующий"},
+    {"key": "student", "name": "Демо: студент"}
+  ],
+  "models": [
+    {
+      "key": "topic",
+      "name": "Тема",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Название", "required": true},
+        {"name": "x_description", "type": "text", "label": "Описание"},
+        {"name": "x_application_ids", "type": "one2many", "relation": "application", "inverse": "x_topic", "label": "Заявки"}
+      ]
+    },
+    {
+      "key": "application",
+      "name": "Заявка на тему",
+      "fields": [
+        {"name": "x_name", "type": "char", "label": "Название", "required": true},
+        {"name": "x_topic", "type": "many2one", "relation": "topic", "label": "Тема", "required": true},
+        {"name": "x_reviewer", "type": "many2one", "relation": "res.users", "label": "Рецензент"}
+      ]
+    }
+  ],
+  "roles": [
+    {"key": "author", "name": "Автор", "groups": ["teacher"], "bindings": {"topic": "create_uid", "application": "x_topic.create_uid"}},
+    {"key": "head", "name": "Заведующий", "groups": ["head"]},
+    {"key": "student", "name": "Студент", "groups": ["student"]},
+    {"key": "applicant", "name": "Заявитель", "groups": ["student"], "bindings": {"application": "create_uid"}},
+    {"key": "app_reviewer", "name": "Рецензент заявки", "groups": ["head"], "bindings": {"application": "x_reviewer"}}
+  ],
+  "processes": [
+    {
+      "key": "topic",
+      "name": "Согласование темы",
+      "model": "topic",
+      "nodes": [
+        {"key": "draft", "name": "Черновик", "start": true, "assignee": "author"},
+        {"key": "review", "name": "На утверждении", "assignee": "head"},
+        {"key": "published", "name": "Опубликована", "type": "end"},
+        {"key": "rejected", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "submit", "label": "Отправить на утверждение", "from": "draft", "to": "review", "by": ["author"], "requires": ["x_description"]},
+        {"key": "approve", "label": "Утвердить", "from": "review", "to": "published", "by": ["head"], "notify": ["author"]},
+        {"key": "rework", "label": "На доработку", "from": "review", "to": "draft", "by": ["head"], "kind": "return", "comment": "required", "notify": ["author"]},
+        {"key": "reject", "label": "Отклонить", "from": "review", "to": "rejected", "by": ["head"], "comment": "required", "notify": ["author"], "effects": [{"type": "fire", "path": "x_application_ids", "flow": "decline_auto"}]}
+      ],
+      "sod": [["submit", "approve"]]
+    },
+    {
+      "key": "application",
+      "name": "Рассмотрение заявки",
+      "model": "application",
+      "nodes": [
+        {"key": "new", "name": "Новая", "start": true, "assignee": "applicant"},
+        {"key": "sent", "name": "Отправлена", "assignee": "author"},
+        {"key": "accepted", "name": "Принята", "type": "end"},
+        {"key": "declined", "name": "Отклонена", "type": "end", "result": "rejected"}
+      ],
+      "flows": [
+        {"key": "send", "label": "Отправить автору", "from": "new", "to": "sent", "by": ["applicant"]},
+        {"key": "accept", "label": "Принять", "from": "sent", "to": "accepted", "by": ["author"], "notify": ["applicant"]},
+        {"key": "decline", "label": "Отклонить", "from": "sent", "to": "declined", "by": ["author"], "comment": "required", "notify": ["applicant"]},
+        {"key": "decline_auto", "label": "Отклонить вместе с темой", "from": "sent", "to": "declined", "system": true, "effects": [{"type": "set", "field": "x_reviewer", "value": {"user": "actor"}}]}
+      ]
+    }
+  ],
+  "access": [
+    {"role": "author", "model": "topic", "op": "create"},
+    {"role": "author", "model": "topic", "op": "read"},
+    {"role": "author", "model": "topic", "op": "write", "nodes": ["draft"], "fields": ["x_name", "x_description"]},
+    {"role": "author", "model": "topic", "op": "unlink", "nodes": ["draft"]},
+    {"role": "head", "model": "topic", "op": "read", "nodes": ["review", "published", "rejected"]},
+    {"role": "student", "model": "topic", "op": "read", "nodes": ["published"]},
+    {"role": "applicant", "model": "application", "op": "create", "fields": ["x_name", "x_topic"]},
+    {"role": "applicant", "model": "application", "op": "read"},
+    {"role": "applicant", "model": "application", "op": "write", "nodes": ["new"], "fields": ["x_name", "x_topic"]},
+    {"role": "author", "model": "application", "op": "read", "nodes": ["sent", "accepted", "declined"]}
+  ]
+}

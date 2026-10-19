@@ -1,0 +1,5 @@
+{
+  "title": "Автор правит тему на утверждении",
+  "description": "Политика разрешает автору write и unlink только в draft, а конфигурация даёт write ещё и в review.",
+  "command": "validate"
+}

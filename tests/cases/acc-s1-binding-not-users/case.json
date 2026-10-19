@@ -1,0 +1,5 @@
+{
+  "title": "Привязка роли не к пользователям",
+  "description": "Привязка роли author ведёт к текстовому полю x_description, а путь привязки должен заканчиваться ссылкой (many2one или many2many) на res.users.",
+  "command": "validate"
+}

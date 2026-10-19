@@ -1,0 +1,5 @@
+{
+  "title": "Демо-конфигурация соответствует демо-политике",
+  "description": "examples/demo_topic.json с пакетом examples/policies/demo_topic.json: все требования политики выполнены, находок нет.",
+  "command": "validate"
+}

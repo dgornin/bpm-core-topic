@@ -1,0 +1,10 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "verdict": "accept",
+ "codes": [],
+ "level": "C"
+}

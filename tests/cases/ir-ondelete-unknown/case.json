@@ -1,0 +1,5 @@
+{
+  "title": "Неподдерживаемый ondelete",
+  "description": "У many2one x_supervisor_id задано ondelete \"set default\". Поддерживаются только restrict, set null, cascade.",
+  "command": "validate"
+}

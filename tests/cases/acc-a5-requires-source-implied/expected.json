@@ -1,0 +1,12 @@
+{
+ "command": "validate",
+ "args": [
+  "ir.json"
+ ],
+ "exit_code": 0,
+ "verdict": "accept",
+ "codes": [
+  "A5.requires_source"
+ ],
+ "level": "B"
+}

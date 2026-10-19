@@ -1,0 +1,5 @@
+{
+  "title": "Неизвестный режим комментария",
+  "description": "У перехода reject comment = \"mandatory\". Допустимы только none, optional, required.",
+  "command": "validate"
+}

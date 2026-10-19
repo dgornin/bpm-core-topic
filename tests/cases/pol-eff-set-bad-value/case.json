@@ -1,0 +1,5 @@
+{
+  "title": "set с недопустимым значением",
+  "description": "Значение {\"user\": \"author\"} не входит в язык значений: из объектов допустимы только {\"today\": true}, {\"now\": true}, {\"user\": \"actor\"} и {\"from\": путь}.",
+  "command": "validate"
+}

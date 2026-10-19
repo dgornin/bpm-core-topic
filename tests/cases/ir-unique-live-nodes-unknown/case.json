@@ -1,0 +1,5 @@
+{
+  "title": "live_nodes с неизвестным узлом",
+  "description": "Уникальность названия действует в узлах [\"review\", \"approved\"], но узла approved в процессе нет.",
+  "command": "validate"
+}
